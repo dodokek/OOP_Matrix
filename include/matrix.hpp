@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <utility>
 
+#include "iterator.hpp"
+
 template <typename T>
 class Matrix final {
 public: 
@@ -21,6 +23,8 @@ private:
     // ------------------------------------------
 
 public:
+// Constructors && Rule of 5
+
     template<typename Iter>
     Matrix (size_type n_line, size_type n_row, Iter begin, Iter end) : 
         data_(new T[n_line * n_row]),
@@ -119,7 +123,7 @@ public:
         return data_pointer_[indx];
     } 
 
-}; // Class SecondBracket
+}; // Class SecondBracket. End.
 
 
     SecondBracket operator[](size_type indx){
@@ -130,6 +134,7 @@ public:
         return SecondBracket(data_ + indx * n_row_);
     }
 
+
     void Dump() {
         for (size_type i = 0; i < n_line_; i++) {
             for (size_type j = 0; j < n_row_; j++){
@@ -139,4 +144,6 @@ public:
         }
     }
 
-}; // Class Matrix
+
+
+}; // Class Matrix. End.

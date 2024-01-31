@@ -1,4 +1,5 @@
 
+#include "iterator.hpp"
 #include "matrix.hpp"
 #include <vector>
 #include <cstddef>
@@ -6,14 +7,11 @@
 
 int main() {
 
-    std::vector<int> tmp{1,2,3,4,5,6};
-    std::vector<int> tmp2{2222222,2,3,4,5,6};
+    int array[100] = {1, 2, 3, 4, 5, 6, 7, 8};
 
-    Matrix<int> TestMatrix(3, 2, tmp.begin(), tmp.end());
-    Matrix<int> AnotherMatrix(3, 2, tmp2.begin(), tmp2.end());
+    MatrixIterator<int> Tmp {array};
 
-    AnotherMatrix = std::move(TestMatrix);
-    AnotherMatrix.Dump();
-
-    std::cout << "Element from matrix: " << AnotherMatrix[3][0] << '\n';
+    std::cout << "*Tmp: " << *Tmp << '\n';
+    std::cout << "*Tmp++: " << *++Tmp << '\n';
+    std::cout << "*Tmp: " << *Tmp << '\n';
 }
