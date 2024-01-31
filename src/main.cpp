@@ -14,4 +14,6 @@ int main() {
 
     AnotherMatrix = std::move(TestMatrix);
     AnotherMatrix.Dump();
+
+    std::cout << "Element from matrix: " << AnotherMatrix[3][0] << '\n';
 }

@@ -77,8 +77,6 @@ public:
         data_{std::exchange(rhs.data_, nullptr)} { }
 
     Matrix& operator=(const Matrix& rhs) {
-       
-        std::cout << "Hello, i am operator = \n";
         n_line_ = rhs.n_line_;
         n_row_ = rhs.n_row_;
         capacity_ = rhs.capacity_;
@@ -89,8 +87,6 @@ public:
 
     Matrix& operator=(Matrix&& rhs) {
         delete[] data_;
-
-        std::cout << "Hello i am operator ======\n";
 
         data_ = std::exchange(rhs.data_, nullptr);
         n_line_ = std::exchange(rhs.n_line_, 0);
@@ -104,6 +100,36 @@ public:
         delete[] data_;
     }
 
+// =================== Functionality
+
+
+// Class of proxy bracket for operator [][]
+class SecondBracket {
+private:
+    T* data_pointer_;
+
+public: 
+    SecondBracket (T* ptr) : data_pointer_(ptr) { }
+
+    T& operator[](size_type indx) {
+        return data_pointer_[indx];
+    }
+
+    const T& operator[](size_type indx) const {
+        return data_pointer_[indx];
+    } 
+
+}; // Class SecondBracket
+
+
+    SecondBracket operator[](size_type indx){
+        return SecondBracket(data_ + indx * n_row_);
+    }
+
+    const SecondBracket operator[](size_type indx) const {
+        return SecondBracket(data_ + indx * n_row_);
+    }
+
     void Dump() {
         for (size_type i = 0; i < n_line_; i++) {
             for (size_type j = 0; j < n_row_; j++){
@@ -113,4 +139,4 @@ public:
         }
     }
 
-};
+}; // Class Matrix
